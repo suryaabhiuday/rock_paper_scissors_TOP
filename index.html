@@ -1,0 +1,108 @@
+<!-- 
+    display options rock paper scissor
+    take input
+    make computer decision using math.random
+    compare both
+    if same retry
+    if 
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors Game</title>
+</head>
+<body>
+    <script>        
+
+        let humanChoice,humanChoiceString,computerChoice;
+        function getHumanChoice() {
+            humanChoiceString = prompt("Enter choice").toLocaleLowerCase();
+            if (humanChoiceString == "rock") {
+                return 1;
+            } else if (humanChoiceString == "paper") {
+                return 2;
+            } else if (humanChoiceString == "scissor") {
+                return 3;
+            } else {
+                alert("invalid input")
+            }
+        }
+
+        function getComputerChoice() {
+            return Math.floor(Math.random() * 3) + 1;
+        }
+
+        
+        function computerChoiceToString() {
+            if (computerChoice == 1) {
+                return "rock";
+            } else if (computerChoice == 2) {
+                return "paper";
+            } else {
+                return "scissor";
+            }
+        }
+        
+        let play = true;
+        
+        
+        let humanScore = 0;
+        let computerScore = 0;
+        
+        function playRound() {
+            // 1 for computer, 0 for tie and -1 for human
+            if (computerChoice == humanChoice) {
+                return 0;
+            } else if (humanChoice == 1 && computerChoice == 2) {
+                return 1;
+            } else if (humanChoice == 2 && computerChoice == 1) {
+                return -1;
+            } else if (humanChoice == 2 && computerChoice == 3) {
+                return 1;
+            } else if (humanChoice == 3 && computerChoice == 2) {
+                return -1;
+            } else if (humanChoice == 1 && computerChoice == 3){
+                return -1;
+            } else {
+                return 1;
+            }
+        }
+        
+        
+        function winner() {
+
+            let winner = playRound()
+
+            if (winner == 0) {
+                return "the game was a tie"
+            } else if (winner == 1 ){
+                return "computer won! better luck next time "
+            } else {
+                return "you wonnn!!!!"
+            }
+        }
+        
+        while (play) {
+
+            humanChoice = getHumanChoice();
+            computerChoice = getComputerChoice();
+
+            console.log(`you played ${humanChoiceString}\n`)
+            console.log(`computer played ${computerChoiceToString()}`)
+
+            console.log(winner())
+
+            let choice = prompt("continue or exit [yes]/[no]")
+
+            if (choice == "yes") {
+                continue;
+            } else {
+                play = false;
+            }
+        }
+    </script>
+</body>
+</html>
